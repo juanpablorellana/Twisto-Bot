@@ -7,7 +7,7 @@ module.exports = async (client, message) => {
 
   ///// COMANDOS /////
 
-  const prefixes = [",", '<@!811400730141392896>', '<@811400730141392896>']
+  const prefixes = [".", '<@!811400730141392896>', '<@811400730141392896>']
   let prefix
   for (const pfx of prefixes) {
     if (message.content.startsWith(pfx.toString())) prefix = pfx

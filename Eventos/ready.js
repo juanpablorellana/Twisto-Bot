@@ -8,10 +8,17 @@ module.exports = async (client) => {
     client.invites[guild.id] = await guild.invites.fetch()
   }
 
-  client.slashCommands.forEach(async (c, g) => {
+  client.slashCommands.forEach(async c => {
     const comandos = await client.application.commands.fetch()
-    if (!comandos.find(x => x.name === c.name)) {
-      client.application.commands.create(c).then(console.log(`Registrado ${c.name}`)).catch(e => console.error(`No se pudo registrar el comando ${c.name} por`, e))
+    let encontrar = comandos.find(x => x.name !== c.name)
+    if (encontrar) {
+      if (client.slashCommands.size > comandos.size) {
+        client.application.commands.create(c).then(console.log(`Registrado ${c.name}`)).catch(console.error)
+      } else if (client.slashCommands.size < comandos.size) {
+        encontrar.delete().then(console.log(`Eliminado ${c.name}`)).catch(console.error)
+      } else {
+        encontrar.edit(c).then(console.log(`Actualizado ${c.name}`)).catch(console.error)
+      }
     }
   })
 

@@ -43,6 +43,11 @@ module.exports = {
       .setStyle('PRIMARY')
     )
 
-    message.reply({ embeds:[embed] , components:[row] })
+    message.reply({ embeds:[embed] , components:[row] }).then(m => {
+      let collector = m.createMessageComponentCollector({ time: 60000 })
+      collector.on('collect', collect => {
+        interaction.reply('hola')
+      })
+    })
   }
 }

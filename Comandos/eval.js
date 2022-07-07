@@ -1,5 +1,5 @@
 module.exports = {
-  nombre: "evall",
+  nombre: "eval",
   alias: [],
   cooldown: 0,
   descripcion: "",
