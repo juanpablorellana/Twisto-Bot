@@ -3,7 +3,7 @@ module.exports = {
   alias: [],
   cooldown: 0,
   descripcion: "",
-  categoria: "",
+  categoria: "privada",
   run: async (MessageEmbed, client, message, args) => {
     const embed = new MessageEmbed()
       .setTitle("Eval")

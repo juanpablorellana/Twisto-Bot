@@ -3,43 +3,43 @@ module.exports = {
   nombre: "managemember",
   alias: ['mm'],
   cooldown: 20000,
-  descripcion: "",
-  categoria: "",
+  descripcion: "Un comando con todas las opciones de moderación",
+  categoria: "mod",
   run: async (MessageEmbed, client, message, args) => {
     if (!message.member.permissions.has('BAN_MEMBERS')) return
     
     const miembro = message.mentions.members.first() || message.guild.members.resolve(args[0]) || message.guild.members.cache.find(m => m.user.username.toLowerCase() == args.join(' ')) || await client.users.fetch(args[0]).catch(() => {})
 
-    if (!miembro) return message.reply('pene')
+    if (!miembro) return message.reply('No')
 
     const embed = new MessageEmbed()
       .setAuthor(miembro.user.tag + ' | ' + miembro.user.id, miembro.user.displayAvatarURL())
       .addField('Se unió con la cuenta creada hace', `${Math.floor((miembro.joinedTimestamp - miembro.user.createdTimestamp)/86400000)} días`)
-      .addField('ModLogs', 'blabla')
-      .addField('Notas', 'blabla')
-      .addField('Tiempo Total Muteado', 'blabla')
-      .addField('Alt', 'blabla')
+      .addField('ModLogs', 'Algo')
+      .addField('Notas', 'Algo')
+      .addField('Tiempo Total Muteado', 'Algo')
+      .addField('Alt', 'Algo')
       .setColor(0x000001)
     
     const row = new Discord.MessageActionRow().addComponents(
       new Discord.MessageButton()
         .setLabel('Banear')
-        .setCustomId('si')
+        .setCustomId('ban')
         .setStyle('PRIMARY')
       ,
       new Discord.MessageButton()
       .setLabel('Kickear')
-      .setCustomId('peeeene')        
+      .setCustomId('kick')        
       .setStyle('PRIMARY')
       ,
       new Discord.MessageButton()
       .setLabel('Mutear')
-      .setCustomId('vw')        
+      .setCustomId('mute')        
       .setStyle('PRIMARY')
       ,
       new Discord.MessageButton()
       .setLabel('Encarcelar')
-      .setCustomId('pewvewvweeene')        
+      .setCustomId('jail')        
       .setStyle('PRIMARY')
     )
 

@@ -15,7 +15,7 @@ module.exports = {
       let footer = ['Puedes confesarte en el MD del bot!', 'Usa .ayuda (comando / categoría) para saber más!']
       embed.setTitle("**hola**")
       embed.setDescription("Bot creado por <@!753600264740536330>\nCentrado en la utilidad, pero también tiene comandos de entretención.\nSugieran cosas para el bot en <#849456636950216714>\nEl prefix es `,` o mencionar al bot\n\n__**Comandos**__\n")
-      embed.addField("**jajaj**", field('jajaj'))
+      // embed.addField("**jajaj**", field('jajaj'))
       embed.addField("**General**", field('general'))
       embed.setThumbnail(message.guild.iconURL({ dynamic: true }))
       embed.setFooter(footer[Math.floor(Math.random() * footer.length)])

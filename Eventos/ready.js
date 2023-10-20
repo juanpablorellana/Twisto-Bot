@@ -24,7 +24,7 @@ module.exports = async (client) => {
 
   function estado() {
     let estados = [{
-      name: ',ayuda',
+      name: '.ayuda',
       type: 'PLAYING'
     }, {
       name: `${client.guilds.cache.size.toLocaleString()} Servers!`,
