@@ -12,7 +12,7 @@ module.exports = {
       function field(cat) {
         return `> \`${client.comandos.filter(c => c.categoria == cat).map(c => c.nombre).join('`, `')}\``
       }
-      let footer = ['Puedes confesarte en el MD del bot!', 'Usa ,ayuda (comando / categoría) para saber más!']
+      let footer = ['Puedes confesarte en el MD del bot!', 'Usa .ayuda (comando / categoría) para saber más!']
       embed.setTitle("**hola**")
       embed.setDescription("Bot creado por <@!753600264740536330>\nCentrado en la utilidad, pero también tiene comandos de entretención.\nSugieran cosas para el bot en <#849456636950216714>\nEl prefix es `,` o mencionar al bot\n\n__**Comandos**__\n")
       embed.addField("**jajaj**", field('jajaj'))
@@ -34,7 +34,7 @@ module.exports = {
       let categoria = client.comandos.map(c => c.categoria).some(c => c === arg)
       let comando = client.comandos.get(arg) || client.comandos.find(c => c.alias && c.alias.includes(arg))
       if (!comando && !categoria) {
-        embed.setDescription("No encontré esa categoría o comando, usa ,ayuda para ver todos los disponibles!")
+        embed.setDescription("No encontré esa categoría o comando, usa .ayuda para ver todos los disponibles!")
         message.channel.send({ embeds: [embed] })
       } else if (comando) {
         if (comando.categoria === 'mod' && !message.member.permissions.has('BAN_MEMBERS')) return message.react("<:non:843389719895080981>")
@@ -42,7 +42,7 @@ module.exports = {
         /*if (comando.categoria === 'sorteos' && message.member.permissions.has('BAN_MEMBERS') || message.member.roles.cache.has('849456513646067742')) { let a } else { return message.react("<:non:843389719895080981>") }*/
 
         let aliases = comando.alias.join("`, `") || "Ninguno"
-        embed.setDescription(`${comando.descripcion}\n\n**» Comando** - \`,${comando.nombre}${!comando.uso ? '' : ' ' + comando.uso}\`\n**» Aliases** - \`${aliases}\`\n**» Cooldown** - \`${!comando.cooldown ? 'No tiene' : comando.cooldown / 1000 + "s"}\``)
+        embed.setDescription(`${comando.descripcion}\n\n**» Comando** - \`.${comando.nombre}${!comando.uso ? '' : ' ' + comando.uso}\`\n**» Aliases** - \`${aliases}\`\n**» Cooldown** - \`${!comando.cooldown ? 'No tiene' : comando.cooldown / 1000 + "s"}\``)
         if (comando.uso) embed.setFooter("() Opcional  [] Obligatorio")
         message.channel.send({ embeds: [embed] })
       } else if (categoria) {
@@ -51,7 +51,7 @@ module.exports = {
         /*if (arg === 'sorteos' && message.member.permissions.has('BAN_MEMBERS') && message.member.roles.cache.has('849456513646067742')) { let a } else { return message.react("<:non:843389719895080981>") }*/
 
         embed.setTitle(`**Categoría ${args[0][0].toUpperCase() + args[0].slice(1).toLowerCase()}**`)
-        embed.setDescription(`${client.comandos.filter(c => c.categoria === arg).map(c => `> \`,${c.nombre}${!c.uso ? '' : ' ' + c.uso}\` - ${c.descripcion}`).join('\n')}`)
+        embed.setDescription(`${client.comandos.filter(c => c.categoria === arg).map(c => `> \`.${c.nombre}${!c.uso ? '' : ' ' + c.uso}\` - ${c.descripcion}`).join('\n')}`)
         embed.setFooter("() Opcional  [] Obligatorio")
         message.channel.send({ embeds: [embed] })
       }
