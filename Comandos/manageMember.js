@@ -4,7 +4,7 @@ module.exports = {
   alias: ['mm'],
   cooldown: 20000,
   descripcion: "",
-  categoria: "",
+  categoria: "mod",
   run: async (MessageEmbed, client, message, args) => {
     if (!message.member.permissions.has('BAN_MEMBERS')) return
     
