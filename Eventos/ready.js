@@ -6,21 +6,7 @@ module.exports = async (client) => {
   for (guild of client.guilds.cache.values()) {
     client.invites[guild.id] = await guild.invites.fetch()
   }
-
-  client.slashCommands.forEach(async c => {
-    const comandos = await client.application.commands.fetch()
-    let encontrar = comandos.find(x => x.name !== c.name)
-    if (encontrar) {
-      if (client.slashCommands.size > comandos.size) {
-        client.application.commands.create(c).then(console.log(`Registrado ${c.name}`)).catch(console.error)
-      } else if (client.slashCommands.size < comandos.size) {
-        encontrar.delete().then(console.log(`Eliminado ${c.name}`)).catch(console.error)
-      } else {
-        encontrar.edit(c).then(console.log(`Actualizado ${c.name}`)).catch(console.error)
-      }
-    }
-  })
-
+ 
   function estado() {
     let estados = [{
       name: '.ayuda',

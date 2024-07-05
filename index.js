@@ -22,8 +22,22 @@ for (var archivo of readdirSync('./Comandos')) {
 client.slashCommands = new Discord.Collection()
 for (var archivo of readdirSync('./Slash')) {
   let comando = require(`./Slash/${archivo}`)
-  client.slashCommands.set(comando.name, comando)
+  client.slashCommands.set(comando.data.name, comando)
 }
+
+const rest = new Discord.REST({ version: '10' }).setToken(process.env.nekot);
+
+registrarComandos = async () => {
+  try {
+    await rest.put(Discord.Routes.applicationCommands('811400730141392896'), {
+      body: client.slashCommands.map(cmd => cmd.data.toJSON())
+    })
+    console.log('Comandos actualizados!')
+  } catch (error) {
+    console.error(error)
+  }
+}
+registrarComandos()
 
 //
 

@@ -1,24 +1,28 @@
 const { SlashCommandBuilder } = require('discord.js')
 const ms = require('ms')
 module.exports = {
-  name: 'mute',
-  description: 'mutea',
-  options: [{
-    type: 6,
-    name: 'miembro',
-    description: 'Al miembro que quieras mutear',
-    required: true
-  }, {
-    type: 3,
-    name: 'tiempo',
-    description: 'El tiempo que quieras mutear al miembro',
-    required: true
-  }, {
-    type: 3,
-    name: 'razon',
-    description: 'La razón porque quieres mutear al miembro',
-    required: true
-  }],
+  data: new SlashCommandBuilder()
+    .setName('mute')
+    .setDescription('Mutea a un miembro')
+    .addUserOption(option =>
+      option
+        .setName('miembro')
+        .setDescription('Miembro que deseas mutear')
+        .setRequired(true)
+    )
+    .addStringOption(option =>
+      option
+        .setName('tiempo')
+        .setDescription('Tiempo que lo deseas mutear')
+        .setRequired(true)
+    )
+    .addStringOption(option =>
+      option
+        .setName('razon')
+        .setDescription('La razón porque quieres mutear al miembro')
+        .setRequired(true)
+    ),
+
   run: async (EmbedBuilder, client, interaction) => {
     const miembro = await interaction.guild.members.fetch(interaction.options.getUser('miembro'))
     const razon = interaction.options.getString('razon')
@@ -26,7 +30,7 @@ module.exports = {
     const embed = new EmbedBuilder()
       .setColor(0x000001)
     function mensajerror() {
-      interaction.reply({ embeds: [embed] , ephemeral: true })
+      interaction.reply({ embeds: [embed], ephemeral: true })
     }
     if (!interaction.member.permissions.has('BAN_MEMBERS')) {
       return interaction.react("<:non:843389719895080981>")
@@ -42,7 +46,7 @@ module.exports = {
           .setColor(0x000001)
         //client.channels.cache.get("849456580562780190").send({ embeds: [embed2] })
       }).catch(e => {
-        console.log(e)
+        console.error(e)
         interaction.reply("Hubo un error")
       })
       /*
