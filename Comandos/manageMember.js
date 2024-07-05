@@ -5,14 +5,14 @@ module.exports = {
   cooldown: 20000,
   descripcion: "Un comando con todas las opciones de moderación",
   categoria: "mod",
-  run: async (MessageEmbed, client, message, args) => {
+  run: async (EmbedBuilder, client, message, args) => {
     if (!message.member.permissions.has('BAN_MEMBERS')) return
     
     const miembro = message.mentions.members.first() || message.guild.members.resolve(args[0]) || message.guild.members.cache.find(m => m.user.username.toLowerCase() == args.join(' ')) || await client.users.fetch(args[0]).catch(() => {})
 
     if (!miembro) return message.reply('No')
 
-    const embed = new MessageEmbed()
+    const embed = new EmbedBuilder()
       .setAuthor(miembro.user.tag + ' | ' + miembro.user.id, miembro.user.displayAvatarURL())
       .addField('Se unió con la cuenta creada hace', `${Math.floor((miembro.joinedTimestamp - miembro.user.createdTimestamp)/86400000)} días`)
       .addField('ModLogs', 'Algo')

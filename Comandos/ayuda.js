@@ -5,8 +5,8 @@ module.exports = {
   descripcion: "Te muestra como usar el Bot. Agregando el nombre de un comando o de una categoría, te informará más.",
   uso: "(comando / categoría)",
   categoria: "general",
-  run: async (MessageEmbed, client, message, args) => {
-    const embed = new MessageEmbed().setColor('000001')
+  run: async (EmbedBuilder, client, message, args) => {
+    const embed = new EmbedBuilder().setColor('000001')
     
     if (!args[0]) {
       function field(cat) {

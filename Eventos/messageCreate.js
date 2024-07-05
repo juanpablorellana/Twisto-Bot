@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js')
+const { EmbedBuilder } = require('discord.js')
 const cooldown = new Set()
 
 module.exports = async (client, message) => {
@@ -29,5 +29,5 @@ module.exports = async (client, message) => {
     cooldown.delete(comando.nombre)
   }, comando.cooldown)
   
-  comando.run(MessageEmbed, client, message, args)
+  comando.run(EmbedBuilder, client, message, args)
 }

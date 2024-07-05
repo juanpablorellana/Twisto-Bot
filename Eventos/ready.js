@@ -1,6 +1,5 @@
 const Discord = require('discord.js')
-const mongoose = require("mongoose")
-const express = require('express')
+//const mongoose = require("mongoose")
 module.exports = async (client) => {
   
   client.invites = {}
@@ -37,16 +36,14 @@ module.exports = async (client) => {
   }
   setInterval(estado, 300000)
 
+  /*
   mongoose.connect(process.env.mongo_url, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
     useCreateIndex: true
   }).then(() => console.log("DB Conectada")).catch(e => console.log(e))
-
-  let app = express()
-  app.get('/', (req, res) => res.send('Lindo'))
-  app.listen(3000)
+  */
   
   console.log(`${client.user.username} Conectado!`)
 }

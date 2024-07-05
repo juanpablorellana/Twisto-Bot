@@ -4,8 +4,8 @@ module.exports = {
   cooldown: 0,
   descripcion: "",
   categoria: "privada",
-  run: async (MessageEmbed, client, message, args) => {
-    const embed = new MessageEmbed()
+  run: async (EmbedBuilder, client, message, args) => {
+    const embed = new EmbedBuilder()
       .setTitle("Eval")
       .setColor(0x000001)
     try {

@@ -1,3 +1,4 @@
+const { SlashCommandBuilder } = require('discord.js')
 const ms = require('ms')
 module.exports = {
   name: 'mute',
@@ -18,11 +19,11 @@ module.exports = {
     description: 'La razón porque quieres mutear al miembro',
     required: true
   }],
-  run: async (MessageEmbed, client, interaction) => {
+  run: async (EmbedBuilder, client, interaction) => {
     const miembro = await interaction.guild.members.fetch(interaction.options.getUser('miembro'))
     const razon = interaction.options.getString('razon')
     const tiempo = interaction.options.getString('tiempo')
-    const embed = new MessageEmbed()
+    const embed = new EmbedBuilder()
       .setColor(0x000001)
     function mensajerror() {
       interaction.reply({ embeds: [embed] , ephemeral: true })
@@ -36,10 +37,10 @@ module.exports = {
       embed.setDescription(`**${miembro.user.tag} muteado por ${tiempo}** || Razón - ${razon}`)
       miembro.timeout(ms(tiempo), razon).then(() => {
         interaction.reply({ embeds: [embed] })
-        const embed2 = new MessageEmbed() // Log
+        const embed2 = new EmbedBuilder() // Log
           .setDescription(`**${miembro.user.tag} muteado**\nRazón - ${razon}\nMuteado por - <@${interaction.member.user.id}>`)
           .setColor(0x000001)
-        client.channels.cache.get("849456580562780190").send({ embeds: [embed2] })
+        //client.channels.cache.get("849456580562780190").send({ embeds: [embed2] })
       }).catch(e => {
         console.log(e)
         interaction.reply("Hubo un error")
@@ -47,7 +48,7 @@ module.exports = {
       /*
       setTimeout(() => {
         miembro.timeout(null, `Terminó el tiempo de mute por - ${razon}`).then(() => {
-          const embed2 = new MessageEmbed()
+          const embed2 = new EmbedBuilder()
             .setDescription(`**${miembro.user.tag} desmuteado**\nRazón - Terminó el tiempo de mute por - ${razon}\nDesmuteado por - <@${interaction.member.user.id}>`)
             .setColor(0x000001)
           client.channels.cache.get("849456580562780190").send({ embeds: [embed2] })
